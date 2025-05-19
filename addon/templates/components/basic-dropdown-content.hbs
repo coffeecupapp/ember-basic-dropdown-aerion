@@ -1,14 +1,36 @@
 {{! template-lint-disable no-inline-styles }}
 {{#if @dropdown.isOpen}}
   <div class="ember-basic-dropdown-content-wormhole-origin">
-    {{#maybe-in-element this.destinationElement @renderInPlace}}
-      {{#if overlay}}
+    {{#if @renderInPlace}}
+    {{! In-place rendering }}
+      {{#if this.overlay}}
         <div class="ember-basic-dropdown-overlay"></div>
       {{/if}}
-      {{#let (element (or @htmlTag "div")) as |Element|}}
-        <Element
+      <div
+        id={{this.dropdownId}}
+        class="ember-basic-dropdown-content ember-basic-dropdown-content--{{@hPosition}} ember-basic-dropdown-content--{{@vPosition}} {{this.animationClass}} ember-basic-dropdown-content--in-place {{@defaultClass}}"
+        style={{this.style}}
+        dir={{@dir}}
+        {{did-insert this.setup}}
+        {{did-insert @dropdown.actions.reposition}}
+        {{did-insert this.setupMutationObserver}}
+        {{did-insert this.animateIn}}
+        {{will-destroy this.teardownMutationObserver}}
+        {{will-destroy this.animateOut}}
+        {{will-destroy this.teardown}}
+        ...attributes
+      >
+        {{yield}}
+      </div>
+    {{else}}
+    {{! Portal rendering using ember-wormhole }}
+      {{#ember-wormhole to=this.destinationElement}}
+        {{#if this.overlay}}
+          <div class="ember-basic-dropdown-overlay"></div>
+        {{/if}}
+        <div
           id={{this.dropdownId}}
-          class="ember-basic-dropdown-content ember-basic-dropdown-content--{{@hPosition}} ember-basic-dropdown-content--{{@vPosition}} {{this.animationClass}}{{if @renderInPlace " ember-basic-dropdown-content--in-place"}} {{@defaultClass}}"
+          class="ember-basic-dropdown-content ember-basic-dropdown-content--{{@hPosition}} ember-basic-dropdown-content--{{@vPosition}} {{this.animationClass}} {{@defaultClass}}"
           style={{this.style}}
           dir={{@dir}}
           {{did-insert this.setup}}
@@ -18,12 +40,13 @@
           {{will-destroy this.teardownMutationObserver}}
           {{will-destroy this.animateOut}}
           {{will-destroy this.teardown}}
-          ...attributes>
+          ...attributes
+        >
           {{yield}}
-        </Element>
-      {{/let}}
-    {{/maybe-in-element}}
+        </div>
+      {{/ember-wormhole}}
+    {{/if}}
   </div>
 {{else}}
-  <div id={{dropdownId}} class="ember-basic-dropdown-content-placeholder" style="display: none;"></div>
+  <div id={{this.dropdownId}} class="ember-basic-dropdown-content-placeholder" style="display: none;"></div>
 {{/if}}
