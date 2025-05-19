@@ -3,7 +3,7 @@ import { computed, action } from "@ember/object";
 import Component from '@ember/component';
 import { join } from '@ember/runloop';
 import { getOwner } from '@ember/application';
-import { htmlSafe } from '@ember/string';
+import { htmlSafe } from '@ember/template';
 import templateLayout from '../templates/components/basic-dropdown-content';
 import { getScrollParent } from '../utils/calculate-position';
 import {
