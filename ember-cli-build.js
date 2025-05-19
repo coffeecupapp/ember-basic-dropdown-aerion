@@ -2,7 +2,7 @@
 
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 const crawl = require('prember-crawler');
-var nodeSass = require('node-sass');
+var nodeSass = require('sass');
 
 module.exports = function(defaults) {
   let project = defaults.project;
