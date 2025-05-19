@@ -177,7 +177,7 @@ export default @layout(templateLayout) @tagName('')class BasicDropdownContent ex
     let parentElement =
       dropdownElement.parentElement ?? this.destinationElement;
     if (parentElement === null) return;
-    if (this.args.renderInPlace) {
+    if (this.get('renderInPlace')) {
       parentElement = parentElement.parentElement;
     }
     if (parentElement === null) return;
