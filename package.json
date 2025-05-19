@@ -26,6 +26,7 @@
     "@ember/optional-features": "^1.1.0",
     "babel-eslint": "^10.0.2",
     "broccoli-asset-rev": "^3.0.0",
+    "ember-auto-import": "^2.10.0",
     "ember-cli": "~3.13.1",
     "ember-cli-dependency-checker": "^3.2.0",
     "ember-cli-fastboot": "^2.0.0",
@@ -52,11 +53,12 @@
     "eslint-plugin-ember": "^7.4.1",
     "eslint-plugin-node": "^10.0.0",
     "loader.js": "^4.7.0",
-    "sass": "*",
     "prember": "~1.0.0",
     "prember-crawler": "^1.0.0",
     "qunit-dom": "^0.9.2",
-    "simple-git": "^1.10.0"
+    "sass": "*",
+    "simple-git": "^1.10.0",
+    "webpack": "^5.99.8"
   },
   "keywords": [
     "ember-addon",
