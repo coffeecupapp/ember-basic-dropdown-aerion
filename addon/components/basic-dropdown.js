@@ -8,7 +8,6 @@ import { getOwner } from '@ember/application';
 import { DEBUG } from '@glimmer/env';
 import templateLayout from '../templates/components/basic-dropdown';
 import calculatePosition from '../utils/calculate-position';
-import { assign } from '@ember/polyfills';
 import requirejs from 'require';
 
 const ignoredStyleAttrs = [
@@ -238,7 +237,7 @@ export default @layout(templateLayout) @tagName('') class BasicDropdown extends 
   }
 
   updateState(changes) {
-    let newState = set(this, 'publicAPI', assign({}, this.publicAPI, changes));
+    let newState = set(this, 'publicAPI', Object.assign({}, this.publicAPI, changes));
     if (this.registerAPI) {
       this.registerAPI(newState);
     }
