@@ -174,7 +174,13 @@ export default @layout(templateLayout) @tagName('')class BasicDropdownContent ex
   @action
   animateOut(dropdownElement) {
     if (!this.animationEnabled) return;
-    let parentElement = this.renderInPlace ? dropdownElement.parentElement.parentElement : dropdownElement.parentElement;
+    let parentElement =
+      dropdownElement.parentElement ?? this.destinationElement;
+    if (parentElement === null) return;
+    if (this.args.renderInPlace) {
+      parentElement = parentElement.parentElement;
+    }
+    if (parentElement === null) return;
     let clone = dropdownElement.cloneNode(true);
     clone.id = `${clone.id}--clone`;
     clone.classList.remove(...this.transitioningInClass.split(' '));
